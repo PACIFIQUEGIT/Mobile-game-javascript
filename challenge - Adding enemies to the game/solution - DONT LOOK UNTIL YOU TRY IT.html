@@ -10,7 +10,7 @@
   </style>
 </head>
 <body>
-  <h1>Challenge - Multi-Level Game SOLUTION</h1>
+  <h1>Challenge Solution - Adding Enemies</h1>
   <canvas id="mycanvas" width="640" height="360" ></canvas>
   <script>
     window.addEventListener("load",function() {
@@ -21,10 +21,6 @@
 
       //keep the game going
       var gameLive = true;
-
-      //current level
-      var level = 1;
-
 
       //enemies
       var enemies = [
@@ -52,18 +48,37 @@
         {
           x: 450,
           y: 100,
-          speedY: -3,
+          speedY: 5,
+          w: 40,
+          h: 40
+        },
+        /*
+      CHALLENGE SOLUTION bellow
+      */
+        {
+          x: 300,
+          y: 100,
+          speedY: 1,
+          w: 40,
+          h: 40
+        },
+        {
+          x: 140,
+          y: 300,
+          speedY: 1,
           w: 40,
           h: 40
         }
       ];
+
+      
 
       //the player object
       var player = {
         x: 10,
         y: 160,
         speedX: 2.5,
-        isMoving: false,  //keep track whether the player is moving or not
+        isMoving: 0,
         w: 40,
         h: 40
       };
@@ -115,42 +130,13 @@
 
         //check if you've won the game
         if(checkCollision(player, goal)) {
-          
-          /*
+          //stop the game
+            gameLive = false;
 
-          ///////////////////////////////
+            alert('You\'ve won!');
 
-          CHALLENGE - MULTI-LEVEL GAME
-
-          -When the player reaches the goal, instead of reloading the page we will
-          increase the "level" variable (declared on line 26)
-
-          -Every time you reach a new level, the player needs to start in it's original position
-
-          -Every time you reach a new level, make the enemies go faster by increasing their speed in 1.
-
-
-          Hint: when the enemies are moving upwards their speed is negative. Be careful not to make them slower!
-
-          ///////////////////////////////
-          */
-
-          //increase the level
-          level++;
-
-          //set the player back to the start
-          player.x = 10;
-          player.y = 160;
-
-          //increase the speed of the enemies by 1
-          enemies.forEach(function(element, index){
-            element.speedY += element.speedY/Math.abs(element.speedY);
-          });
-
-          //look in the console
-          console.log(level);
-          console.log(enemies);
-            
+            //reload page
+            window.location = "";
         }
 
         //update player
